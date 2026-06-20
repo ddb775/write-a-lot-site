@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>write-a-lot — a calm, offline writing app</title>
+<meta name="description" content="A local, offline writing app for journaling and creative writing. Your words are plain Markdown files you own forever. No database, no cloud, no account, no lock-in." />
+<link rel="icon" href="assets/favicon.png" />
+<style>
+  @font-face {
+    font-family: "WAL Mono";
+    src: url("assets/DejaVuSansMono.ttf") format("truetype");
+    font-weight: 400; font-display: swap;
+  }
+  @font-face {
+    font-family: "WAL Mono";
+    src: url("assets/DejaVuSansMono-Bold.ttf") format("truetype");
+    font-weight: 700; font-display: swap;
+  }
+  :root {
+    --paper: #0d0d0d;
+    --ink: #e8e4d8;
+    --ink-dim: #7d7a6e;
+    --panel: #161616;
+    --panel-edge: #2a2a2a;
+    --accent: #c8a96a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "WAL Mono", ui-monospace, "Cascadia Code", Menlo, Consolas, monospace;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 8vh 24px 6vh; }
+  header { text-align: center; margin-bottom: 5vh; }
+  .wordmark { font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: 0.02em; margin: 0; }
+  .tagline { color: var(--ink-dim); font-size: 1.05rem; margin: 0.8rem auto 0; max-width: 48ch; }
+  .lede { margin: 1.6rem auto 0; max-width: 52ch; color: var(--ink); }
+
+  figure { margin: 4vh 0 1rem; }
+  figure img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--panel-edge); border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  figcaption { color: var(--ink-dim); font-size: 0.85rem; text-align: center; margin-top: 0.7rem; }
+
+  h2 { font-size: 1.15rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); margin: 6vh 0 1.2rem; }
+  .points { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+  .points li::before { content: "— "; color: var(--accent); }
+
+  .downloads { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 1rem; }
+  .os { border: 1px solid var(--panel-edge); background: var(--panel); border-radius: 8px; padding: 18px 14px; text-align: center; }
+  .os h3 { margin: 0 0 0.9rem; font-size: 1rem; font-weight: 700; }
+  .btn {
+    display: inline-block; width: 100%; padding: 10px 12px; border-radius: 6px;
+    border: 1px solid var(--panel-edge); background: #1e1e1e; color: var(--ink);
+    text-decoration: none; font-weight: 700; font-size: 0.92rem;
+  }
+  .btn:hover { border-color: var(--accent); color: #fff; }
+  .alts { margin-top: 0.7rem; font-size: 0.8rem; color: var(--ink-dim); line-height: 1.6; }
+  .alts a { color: var(--ink-dim); }
+  .alts a:hover { color: var(--accent); }
+
+  details { margin-top: 1.4rem; border: 1px solid var(--panel-edge); border-radius: 8px; padding: 12px 16px; background: var(--panel); }
+  summary { cursor: pointer; color: var(--ink-dim); font-size: 0.9rem; }
+  details p { margin: 0.8rem 0 0.2rem; font-size: 0.9rem; }
+  details code { background: #000; padding: 0.1em 0.35em; border-radius: 3px; }
+
+  .donate { text-align: center; margin: 7vh 0 2vh; }
+  .donate a {
+    display: inline-block; padding: 12px 22px; border-radius: 8px;
+    border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-weight: 700;
+  }
+  .donate a:hover { background: var(--accent); color: #1a1206; }
+  .donate p { color: var(--ink-dim); font-size: 0.9rem; max-width: 46ch; margin: 1rem auto 0; }
+
+  .meta-note { text-align: center; color: var(--ink-dim); font-size: 0.85rem; max-width: 54ch; margin: 4vh auto 0; }
+  .meta-note a { color: var(--ink-dim); }
+  .meta-note a:hover { color: var(--accent); }
+
+  footer { text-align: center; color: var(--ink-dim); font-size: 0.82rem; border-top: 1px solid var(--panel-edge); padding-top: 2.5vh; margin-top: 6vh; }
+
+  @media (max-width: 560px) { .downloads { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1 class="wordmark">write-a-lot</h1>
+    <p class="tagline">A calm, offline place to write a lot. Journaling and creative writing in one quiet editor.</p>
+    <p class="lede">Your words live as plain Markdown files you own forever. No database, no cloud, no account, no lock-in. The journal outlives the app.</p>
+  </header>
+
+  <figure>
+    <img src="assets/write.png" alt="write-a-lot in write mode: a quiet full-screen writing column on black paper" />
+    <figcaption>Write mode: one quiet column, the width of a sheet of paper.</figcaption>
+  </figure>
+
+  <h2>What it is</h2>
+  <ul class="points">
+    <li>One focused editor for both journaling and creative writing. The character comes from how you use it, not a mode switch.</li>
+    <li>Every entry is a plain <code>.md</code> file in a folder you choose. Open them in any editor, sync them with any tool, read them in fifty years.</li>
+    <li>Per-mode dark or light paper, full-screen, keyboard-driven, with adjustable text size. Fast and tiny: it uses your system's webview, not a bundled browser.</li>
+  </ul>
+
+  <figure>
+    <img src="assets/read.png" alt="write-a-lot in read mode: a two-page open-book spread on light paper" />
+    <figcaption>Read mode: the same words as a two-page open book.</figcaption>
+  </figure>
+
+  <h2 id="download">Download</h2>
+  <div class="downloads">
+    <div class="os">
+      <h3>Linux</h3>
+      <a class="btn" href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot_0.1.0_amd64.deb">.deb</a>
+      <div class="alts">
+        Debian / Ubuntu<br />
+        <a href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot_0.1.0_amd64.AppImage">.AppImage</a> ·
+        <a href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot-0.1.0-1.x86_64.rpm">.rpm</a>
+      </div>
+    </div>
+    <div class="os">
+      <h3>macOS</h3>
+      <a class="btn" href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot_0.1.0_aarch64.dmg">Apple Silicon</a>
+      <div class="alts">
+        .dmg<br />
+        <a href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot_0.1.0_x64.dmg">Intel (.dmg)</a>
+      </div>
+    </div>
+    <div class="os">
+      <h3>Windows</h3>
+      <a class="btn" href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot_0.1.0_x64_en-US.msi">.msi</a>
+      <div class="alts">
+        installer<br />
+        <a href="https://github.com/ddb775/write-a-lot/releases/download/v0.1.0/write-a-lot_0.1.0_x64-setup.exe">.exe setup</a>
+      </div>
+    </div>
+  </div>
+
+  <details>
+    <summary>Opening it the first time (these builds aren't code-signed yet)</summary>
+    <p><strong>macOS:</strong> right-click the app, choose Open, then confirm. Or System Settings &gt; Privacy &amp; Security &gt; Open Anyway.</p>
+    <p><strong>Windows:</strong> if SmartScreen appears, click "More info", then "Run anyway".</p>
+    <p><strong>Linux:</strong> install the <code>.deb</code> from a terminal with <code>sudo dpkg -i write-a-lot_0.1.0_amd64.deb</code> (a graphical installer may refuse a local file). For the AppImage, <code>chmod +x</code> it and run.</p>
+  </details>
+
+  <div class="donate">
+    <a href="https://donate.stripe.com/28EdRb2Qk8PQeVV8WK6sw00">♥ Donate to POLIFAX</a>
+    <p>write-a-lot is free and open source. If it is useful to you, please consider a donation to the POLIFAX charity.</p>
+  </div>
+
+  <p class="meta-note">A small hobby project, built for the joy of it. No official social accounts; the only homes are this site and <a href="https://github.com/ddb775/write-a-lot">GitHub</a>. Questions or bugs? Open an issue there.</p>
+
+  <footer>
+    <a href="https://github.com/ddb775/write-a-lot">Source on GitHub</a> · MIT license · offline by design
+  </footer>
+
+</div>
+</body>
+</html>
