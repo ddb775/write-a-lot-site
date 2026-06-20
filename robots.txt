@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://write-a-lot.com/sitemap.xml
