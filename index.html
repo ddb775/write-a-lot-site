@@ -76,7 +76,7 @@
   header { text-align: center; margin-bottom: 5vh; }
   .wordmark { font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: 0.02em; margin: 0; }
   .tagline { color: var(--ink-dim); font-size: 1.05rem; margin: 0.8rem auto 0; max-width: 48ch; }
-  .lede { margin: 1.6rem auto 0; max-width: 52ch; color: var(--ink); }
+  .lede { margin: 2.4rem auto 0; max-width: 52ch; color: var(--ink); text-align: center; }
 
   figure { margin: 4vh 0 1rem; }
   figure img {
@@ -85,6 +85,10 @@
     box-shadow: 0 12px 40px rgba(0,0,0,0.5);
   }
   figcaption { color: var(--ink-dim); font-size: 0.85rem; text-align: center; margin-top: 0.7rem; }
+  .zoom { display: block; cursor: zoom-in; }
+  .lightbox { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.94); padding: 3vh; cursor: zoom-out; }
+  .lightbox:target { display: flex; }
+  .lightbox img { max-width: 96vw; max-height: 94vh; border-radius: 6px; box-shadow: 0 10px 50px rgba(0,0,0,0.7); }
 
   h2 { font-size: 1.15rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); margin: 6vh 0 1.2rem; }
   .points { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
@@ -133,7 +137,6 @@
   <header>
     <h1 class="wordmark">write-a-lot</h1>
     <p class="tagline">A lightweight, calm, offline place to write a lot. Journaling and creative writing in one quiet editor.</p>
-    <p class="lede">Your words live as plain Markdown files you own forever. No database, no cloud, no account, no lock-in. The journal outlives the app.</p>
   </header>
 
   <h2 id="download">Download</h2>
@@ -172,8 +175,10 @@
     <p><strong>Linux:</strong> install the <code>.deb</code> from a terminal with <code>sudo dpkg -i write-a-lot_0.1.0_amd64.deb</code> (a graphical installer may refuse a local file). For the AppImage, <code>chmod +x</code> it and run.</p>
   </details>
 
+  <p class="lede">Your words live as plain Markdown files you own forever. No database, no cloud, no account, no lock-in. The journal outlives the app.</p>
+
   <figure>
-    <img src="assets/write.png" alt="write-a-lot in write mode: a quiet full-screen writing column on black paper" />
+    <a href="#lb-write" class="zoom"><img src="assets/write.png" alt="write-a-lot in write mode: a quiet full-screen writing column on black paper" /></a>
     <figcaption>Write mode: everything fades but the words, so you can fall into your flow.</figcaption>
   </figure>
 
@@ -185,7 +190,7 @@
   </ul>
 
   <figure>
-    <img src="assets/read.png" alt="write-a-lot in read mode: a two-page open-book spread on light paper" />
+    <a href="#lb-read" class="zoom"><img src="assets/read.png" alt="write-a-lot in read mode: a two-page open-book spread on light paper" /></a>
     <figcaption>Read mode: the same words as a two-page open book.</figcaption>
   </figure>
 
@@ -199,6 +204,9 @@
   <footer>
     <a href="https://github.com/ddb775/write-a-lot">Source on GitHub</a> · MIT license · offline by design
   </footer>
+
+  <a href="#_" class="lightbox" id="lb-write"><img src="assets/write.png" alt="write-a-lot write mode, full size" /></a>
+  <a href="#_" class="lightbox" id="lb-read"><img src="assets/read.png" alt="write-a-lot read mode, full size" /></a>
 
 </div>
 </body>
